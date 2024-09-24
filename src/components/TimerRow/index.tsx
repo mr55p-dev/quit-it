@@ -14,14 +14,18 @@ export default function TimerRow({ timer }: { timer: Timer }) {
   return (
     <div className={style.wrapper}>
       <div className={style.lhs}>
-        <h3 className={style.title}>{timer.title}</h3>
-        <p>{timer.description}</p>
-        <Delete id={timer.id} />
+        <div className="flex flex-col gap-2 justify-between">
+          <div className="flex gap-2">
+            <h3 className={style.title}>{timer.title}</h3>
+            <Delete id={timer.id} />
+          </div>
+          <p>{timer.description}</p>
+        </div>
+        <p className="text-sm text-gray-700">
+          Started on <span>{startDate.toLocaleString()}</span>
+        </p>
       </div>
       <div className={style.rhs}>
-        <div>
-          Started on <span>{startDate.toLocaleString()}</span>
-        </div>
         <div>
           <Ticker ts={timer.timestamp} />
         </div>

@@ -1,7 +1,6 @@
 .wrapper {
-  display: grid;
-  grid-template-columns: repeat(6, fit-content);
-  grid-template-areas: "years months days hours minutes seconds";
+  display: flex;
+  flex-direction: column;
 }
 
 .years {

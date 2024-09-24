@@ -22,13 +22,15 @@ function plurlaise(value: number, text: string): string {
 function LabelRender({
   value,
   label,
+  showZero,
   className,
 }: {
   value: number;
   label: string;
+  showZero?: boolean;
   className?: string;
 }) {
-  if (!value) return null;
+  if (!value && !showZero) return null;
   return (
     <span className={className}>
       {value} {plurlaise(value, label)}
@@ -48,36 +50,43 @@ function TickerComponent({ ts }: { ts: number }) {
   }, [tsDate]);
 
   const diff = new Date(int);
+  const year = diff.getUTCFullYear() - 1970;
+  const month = diff.getUTCMonth();
+  const day = diff.getUTCDate();
+  const hours = diff.getUTCHours();
+  const minutes = diff.getUTCMinutes();
+  const seconds = diff.getUTCSeconds();
   return (
     <div className={style.wrapper}>
-      <LabelRender
-        className={style.years}
-        value={diff.getUTCFullYear() - 1970}
-        label="year"
-      />
+      <LabelRender className={style.years} value={year} label="year" />
       <LabelRender
         className={style.months}
-        value={diff.getUTCMonth()}
+        showZero={Boolean(year)}
+        value={month}
         label="month"
       />
       <LabelRender
         className={style.days}
-        value={diff.getUTCDate()}
+        showZero={Boolean(year + month)}
+        value={day}
         label="day"
       />
       <LabelRender
         className={style.hours}
-        value={diff.getUTCHours()}
+        showZero={Boolean(year + month + day)}
+        value={hours}
         label="hour"
       />
       <LabelRender
         className={style.minutes}
-        value={diff.getUTCMinutes()}
+        showZero={Boolean(year + month + day + hours)}
+        value={minutes}
         label="minute"
       />
       <LabelRender
         className={style.seconds}
-        value={diff.getUTCSeconds()}
+        showZero={Boolean(year + month + day + hours + minutes)}
+        value={seconds}
         label="second"
       />
     </div>
