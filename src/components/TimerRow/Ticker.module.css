@@ -1,0 +1,35 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(6, fit-content);
+  grid-template-areas: "years months days hours minutes seconds";
+}
+
+.years {
+  @apply px-1;
+  grid-area: years;
+}
+
+.months {
+  @apply px-1;
+  grid-area: months;
+}
+
+.days {
+  @apply px-1;
+  grid-area: days;
+}
+
+.hours {
+  @apply px-1;
+  grid-area: hours;
+}
+
+.minutes {
+  @apply px-1;
+  grid-area: minutes;
+}
+
+.seconds {
+  @apply px-1;
+  grid-area: seconds;
+}

@@ -1,0 +1,19 @@
+.wrapper {
+  @apply flex justify-between 
+	rounded-lg
+	border border-gray-200
+	bg-gray-50
+	p-6;
+}
+
+.lhs {
+  @apply flex flex-col gap-6;
+}
+
+.title {
+  @apply text-left text-xl font-semibold;
+}
+
+.rhs {
+  @apply flex flex-col gap-6 text-right;
+}
