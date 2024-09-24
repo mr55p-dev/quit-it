@@ -1,9 +1,10 @@
 import { Ticker } from "./Ticker";
 import style from "./TimerRow.module.css";
+import Delete from "./Delete";
 
 export type Timer = {
-  id: string;
-  name: string;
+  id: number;
+  title: string;
   description: string;
   timestamp: number;
 };
@@ -13,8 +14,9 @@ export default function TimerRow({ timer }: { timer: Timer }) {
   return (
     <div className={style.wrapper}>
       <div className={style.lhs}>
-        <h3 className={style.title}>{timer.name}</h3>
+        <h3 className={style.title}>{timer.title}</h3>
         <p>{timer.description}</p>
+        <Delete id={timer.id} />
       </div>
       <div className={style.rhs}>
         <div>
