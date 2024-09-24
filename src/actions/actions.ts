@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 async function getDB() {
   return await open({
     driver: sqlite3.Database,
+    mode: sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
     filename: "./file.sqlite3",
   });
 }
