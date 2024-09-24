@@ -13,23 +13,17 @@ export default function TimerRow({ timer }: { timer: Timer }) {
   const startDate = new Date(timer.timestamp);
   return (
     <div className={style.wrapper}>
-      <div className={style.lhs}>
-        <div className="flex flex-col gap-2 justify-between">
-          <div className="flex gap-2">
-            <h3 className={style.title}>{timer.title}</h3>
-            <Delete id={timer.id} />
-          </div>
-          <p>{timer.description}</p>
-        </div>
-        <p className="text-sm text-gray-700">
-          Started on <span>{startDate.toLocaleString()}</span>
-        </p>
+      <div className="flex gap-2">
+        <h3 className={style.title}>{timer.title}</h3>
       </div>
-      <div className={style.rhs}>
-        <div>
-          <Ticker ts={timer.timestamp} />
-        </div>
+      <p>{timer.description}</p>
+      <div className="absolute top-4 right-6">
+        <Delete id={timer.id} />
       </div>
+      <Ticker ts={timer.timestamp} />
+      <p className="text-sm text-gray-700">
+        Started on <span>{startDate.toLocaleString()}</span>
+      </p>
     </div>
   );
 }

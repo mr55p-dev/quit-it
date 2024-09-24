@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import React from "react";
-import style from "./Ticker.module.css";
+import style from "./TimerRow.module.css";
 
 /**
  * calculates date difference in milliseconds
@@ -52,12 +52,12 @@ function TickerComponent({ ts }: { ts: number }) {
   const diff = new Date(int);
   const year = diff.getUTCFullYear() - 1970;
   const month = diff.getUTCMonth();
-  const day = diff.getUTCDate();
+  const day = diff.getUTCDate() - 1;
   const hours = diff.getUTCHours();
   const minutes = diff.getUTCMinutes();
   const seconds = diff.getUTCSeconds();
   return (
-    <div className={style.wrapper}>
+    <div className={style.ticker}>
       <LabelRender className={style.years} value={year} label="year" />
       <LabelRender
         className={style.months}

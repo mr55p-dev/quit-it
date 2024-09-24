@@ -1,22 +1,16 @@
 .wrapper {
   @apply rounded-lg
-  flex justify-between
 	border border-gray-200
 	bg-gray-50
-	p-6;
-}
-
-.lhs {
-  @apply flex flex-col gap-6 justify-between;
+	relative
+	p-6
+	flex flex-col gap-2;
 }
 
 .title {
-  @apply text-left text-xl font-semibold;
+  @apply text-left text-xl font-bold;
 }
 
-.rhs {
-  @apply flex flex-col gap-6 text-right;
-}
-
-.editDialog {
+.ticker {
+  @apply flex gap-2 text-center flex-wrap font-semibold;
 }
