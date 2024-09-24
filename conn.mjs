@@ -6,7 +6,6 @@ async function main() {
         filename: "./file.sqlite3",
         driver: sqlite3.Database,
     });
-    console.log("Connected succesfully");
 
     await conn.run(`
 CREATE TABLE IF NOT EXISTS "timers" (
@@ -16,16 +15,6 @@ CREATE TABLE IF NOT EXISTS "timers" (
 	timestamp INTEGER NOT NULL
 );
 `);
-
-    await conn.run(`
-INSERT OR REPLACE INTO timers 
-	(id, title, description, timestamp) 
-VALUES 
-	(1, 'Stop nicotine','No more nicotine intake for Ellis.', 1726852105000);
-`);
-
-    const res = await conn.get("SELECT * FROM timers;");
-    console.log("result", res);
 }
 
 main();
