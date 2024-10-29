@@ -1,40 +1,27 @@
 "use server";
 import { Timer } from "@/components/TimerRow";
-import sqlite3 from "sqlite3";
-import { open } from "sqlite";
+import pool from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
-async function getDB() {
-  return await open({
-    driver: sqlite3.Database,
-    mode: sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
-    filename: "./file.sqlite3",
-  });
-}
-
 export async function getTimers(): Promise<Timer[]> {
-  const db = await getDB();
-  const res = await db.all<Timer[]>("SELECT * FROM timers;", {});
-  return res ?? [];
+  const res = await pool.query(`SELECT * FROM quitit`);
+  return res?.rows ?? [];
 }
 
 export async function deleteTimer(id: number) {
-  const db = await getDB();
-  const stmnt = await db.prepare("DELETE FROM timers WHERE id = ?");
-  await stmnt.run(id);
+  await pool.query("DELETE FROM quitit WHERE id = $1", [id]);
   revalidatePath("/");
 }
 
 export async function createTimer(data: FormData) {
-  const db = await getDB();
-  const stmnt = await db.prepare(
-    "INSERT INTO timers (title, description, timestamp) VALUES (?, ?, ?)",
-  );
-  const title = data.get("title");
-  const desc = data.get("description");
-  const stamp = data.get("timestamp");
-  console.debug("Stamp", stamp);
+  const title = data.get("title")?.toString();
+  const desc = data.get("description")?.toString();
+  const rawStamp = data.get("timestamp") as string;
+  const stamp = new Date(rawStamp).getTime();
 
-  await stmnt.run(title, desc, stamp);
+  await pool.query(
+    `INSERT INTO quitit (title, description, timestamp) VALUES ($1, $2, $3)`,
+    [title, desc, stamp],
+  );
   revalidatePath("/");
 }
