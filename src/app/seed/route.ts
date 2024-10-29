@@ -6,7 +6,7 @@ CREATE TABLE quitit (
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT,
-    timestamp BIGINT NOT NULL
+    timestamp TEXT NOT NULL
 );
   `);
 }

@@ -38,7 +38,7 @@ function LabelRender({
   );
 }
 
-function TickerComponent({ ts }: { ts: number }) {
+function TickerComponent({ ts }: { ts: string }) {
   const tsDate = React.useMemo(() => new Date(ts), [ts]);
   const [int, setInt] = React.useState(() => dateDiff(tsDate, new Date()));
 

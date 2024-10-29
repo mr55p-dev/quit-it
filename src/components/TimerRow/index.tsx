@@ -6,7 +6,7 @@ export type Timer = {
   id: number;
   title: string;
   description: string;
-  timestamp: number;
+  timestamp: string;
 };
 
 export default function TimerRow({ timer }: { timer: Timer }) {
